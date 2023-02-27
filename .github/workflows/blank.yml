@@ -37,7 +37,7 @@ jobs:
           SF_WAREHOUSE: "DEVOPS_WH"
           # SF_DATABASE: ${{ secrets.SF_DATABASE }}
           SF_DATABASE: "DEMO_DB"
-          # SNOWFLAKE_PASSWORD: ${{ secrets.SF_PASSWORD }}
+          SNOWFLAKE_PASSWORD: ${{ secrets.SF_PASSWORD }}
         run: |
           echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
           python --version
