@@ -1,8 +1,4 @@
 name: SnowSQL
-env:
-  SNOWSQL_ACCOUNT: rgbomgn-zn62205
-  SNOWSQL_USER: devops
-  SNOWSQL_PWD: ${{ secrets.SF_PASSWORD }}
   
 # on: push                                                  
 on: 
@@ -22,4 +18,8 @@ jobs:
     - name: Test installation
       run:  $GITHUB_WORKSPACE/snowsql -v
     - name: Execute SQL against Snowflake
+      env:
+        SNOWSQL_ACCOUNT: rgbomgn-zn62205
+        SNOWSQL_USER: devops
+        SNOWSQL_PWD: ${{ secrets.SF_PASSWORD }}
       run:  $GITHUB_WORKSPACE/snowsql -f $GITHUB_WORKSPACE/migrations/code.sql;
