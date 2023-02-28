@@ -2,6 +2,14 @@ name: Use SnowSQL
   
 # on: push                                                  
 on: 
+  push:
+    branches:
+      - main
+    paths:
+      - 'migrations/**'
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:                         
