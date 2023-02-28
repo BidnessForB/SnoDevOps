@@ -1,4 +1,4 @@
-name: Use SnowSQL
+name: Execute DDL as Dev
   
 # on: push                                                  
 on: 
@@ -7,28 +7,23 @@ on:
       - main
     paths:
       - 'migrations/**'
-  pull_request:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:                         
-  executequery:                           
+  CloneDevToProd:                           
     name: Install SnowSQL                          
     runs-on: ubuntu-latest                           
     steps:
     - name: Checkout
-      uses: actions/checkout@master
+      uses: actions/checkout@v3
     - name: Download SnowSQL
       run:  |
-        curl -O https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/1.2/linux_x86_64/snowsql-1.2.9-linux_x86_64.bash
+        curl -O https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/1.2/linux_x86_64/snowsql-1.2.24-linux_x86_64.bash
     - name: Install SnowSQL
       run: SNOWSQL_DEST=$GITHUB_WORKSPACE SNOWSQL_LOGIN_SHELL=~/.profile bash snowsql-1.2.9-linux_x86_64.bash
-    - name: Test installation
-      run:  $GITHUB_WORKSPACE/snowsql -v
-    - name: Execute SQL against Snowflake
+    - name: Execute SQL/DDL against Snowflake
       env:
         SNOWSQL_ACCOUNT: rgbomgn-zn62205
         SNOWSQL_USER: devops
         SNOWSQL_PWD: ${{ secrets.SF_PASSWORD }}
-      run:  $GITHUB_WORKSPACE/snowsql -o exit_on_error=true -f $GITHUB_WORKSPACE/migrations/DML.sql;
+      run:  $GITHUB_WORKSPACE/snowsql -f $GITHUB_WORKSPACE/migrations/deploy-to-prod.sql;
