@@ -6,7 +6,9 @@ env:
   SNOWSQL_PWD: ${{ secrets.SF_PASSWORD }}
   
 # on: push                                                  
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
+  
 jobs:                         
   executequery:                           
     name: Install SnowSQL                          
