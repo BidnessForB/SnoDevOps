@@ -1,4 +1,4 @@
-name: Use SnowSQL
+name: Execute DDL as Dev
   
 # on: push                                                  
 on: 
@@ -26,7 +26,7 @@ jobs:
       run: SNOWSQL_DEST=$GITHUB_WORKSPACE SNOWSQL_LOGIN_SHELL=~/.profile bash snowsql-1.2.9-linux_x86_64.bash
     - name: Test installation
       run:  $GITHUB_WORKSPACE/snowsql -v
-    - name: Execute SQL against Snowflake
+    - name: Execute SQL/DDL against Snowflake
       env:
         SNOWSQL_ACCOUNT: rgbomgn-zn62205
         SNOWSQL_USER: devops
