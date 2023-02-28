@@ -23,4 +23,4 @@ jobs:
         SNOWSQL_ACCOUNT: rgbomgn-zn62205
         SNOWSQL_USER: devops
         SNOWSQL_PWD: ${{ secrets.SF_PASSWORD }}
-      run:  $GITHUB_WORKSPACE/snowsql -f $GITHUB_WORKSPACE/migrations/code.sql;
+      run:  $GITHUB_WORKSPACE/snowsql -f $GITHUB_WORKSPACE/migrations/DML.sql;
